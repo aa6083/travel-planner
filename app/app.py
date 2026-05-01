@@ -1,9 +1,9 @@
 import os
 from flask import Flask, render_template, request
-from openai import OpenAI
+from groq import Groq
 
 app = Flask(__name__)
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -28,7 +28,7 @@ def index():
         """
 
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="llama3-8b-8192",
             messages=[{"role": "user", "content": prompt}]
         )
         itinerary = response.choices[0].message.content
