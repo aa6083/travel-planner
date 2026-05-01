@@ -18,6 +18,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t %DOCKERHUB_USER%/%IMAGE_NAME%:latest .'
+            }
         }
 
         stage('Push to DockerHub') {
@@ -35,8 +36,7 @@ pipeline {
 
         stage('Done') {
             steps {
-                echo '✅ Image pushed to DockerHub!'
-                echo 'Now restart container on EC2 manually'
+                echo 'Image pushed to DockerHub!'
             }
         }
     }
