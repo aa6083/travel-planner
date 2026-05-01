@@ -4,7 +4,6 @@ pipeline {
     environment {
         DOCKERHUB_USER = 'affanalrayyan'
         IMAGE_NAME     = 'travel-planner'
-        AWS_KEY        = 'projectkey'
     }
 
     stages {
@@ -35,26 +34,10 @@ pipeline {
             }
         }
 
-        stage('Terraform Init & Apply') {
-            steps {
-                withCredentials([
-                    string(credentialsId: 'aws-access-key', variable: 'AWS_ACCESS_KEY_ID'),
-                    string(credentialsId: 'aws-secret-key', variable: 'AWS_SECRET_ACCESS_KEY')
-                ]) {
-                    dir('terraform') {
-                        bat 'terraform init'
-                        bat 'terraform apply -auto-approve -var="key_name=%AWS_KEY%"'
-                    }
-                }
-            }
-        }
-
         stage('Done') {
             steps {
-                dir('terraform') {
-                    bat 'terraform output app_url'
-                }
-                echo '✅ Travel Planner is LIVE on AWS!'
+                echo '✅ Image pushed to DockerHub!'
+                echo 'Now restart container on EC2 manually'
             }
         }
     }
