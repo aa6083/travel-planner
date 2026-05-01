@@ -1,4 +1,3 @@
-Set-Content C:\travel-planner\terraform\main.tf @'
 provider "aws" {
   region = var.aws_region
 }
@@ -46,4 +45,3 @@ EOF
     Name = "Travel-Planner"
   }
 }
-'@
