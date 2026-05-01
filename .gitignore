@@ -1,1 +1,6 @@
-terraform/userdata.sh
+*.pem
+*.tfstate
+*.tfstate.backup
+.terraform/
+terraform/.terraform/
+userdata.sh
