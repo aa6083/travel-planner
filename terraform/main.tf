@@ -1,3 +1,4 @@
+Set-Content C:\travel-planner\terraform\main.tf @'
 provider "aws" {
   region = var.aws_region
 }
@@ -32,9 +33,17 @@ resource "aws_instance" "travel_app" {
   instance_type          = var.instance_type
   key_name               = var.key_name
   vpc_security_group_ids = [aws_security_group.travel_sg.id]
-  user_data              = file("userdata.sh")
+  user_data              = <<-EOF
+#!/bin/bash
+yum update -y
+yum install -y docker
+service docker start
+docker pull affanalrayyan/travel-planner:latest
+docker run -d -p 5000:5000 affanalrayyan/travel-planner:latest
+EOF
 
   tags = {
     Name = "Travel-Planner"
   }
 }
+'@
