@@ -3,7 +3,7 @@ variable "aws_region" {
 }
 
 variable "key_name" {
-  default = "projectkey"
+  default = "dkey"
 }
 
 variable "ami_id" {
