@@ -4,7 +4,7 @@ import requests
 
 app = Flask(__name__)
 
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
+GROQ_API_KEY = os.environ.get("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")
 
 def generate_itinerary(destination, days, budget, style):
     headers = {
