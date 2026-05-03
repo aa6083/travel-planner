@@ -1,6 +1,4 @@
-*.pem
-*.tfstate
-*.tfstate.backup
-.terraform/
-terraform/.terraform/
-userdata.sh
+__pycache__/
+*.pyc
+.env
+*.env

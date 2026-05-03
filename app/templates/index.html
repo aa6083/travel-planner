@@ -1,125 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Travel Itinerary Planner</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #0a0a1a;
-      color: #fff;
-      min-height: 100vh;
-      padding: 40px 20px;
-    }
-    .container { max-width: 700px; margin: 0 auto; }
-    h1 {
-      font-size: 2rem;
-      color: #60a5fa;
-      margin-bottom: 8px;
-      text-align: center;
-    }
-    p.sub {
-      text-align: center;
-      color: #6b7280;
-      margin-bottom: 32px;
-      font-size: 0.9rem;
-    }
-    .card {
-      background: #1a1a2e;
-      border: 1px solid #2d2d5e;
-      border-radius: 16px;
-      padding: 32px;
-      margin-bottom: 24px;
-    }
-    label {
-      display: block;
-      color: #9ca3af;
-      font-size: 0.85rem;
-      margin-bottom: 6px;
-      margin-top: 16px;
-    }
-    input, select {
-      width: 100%;
-      padding: 12px;
-      background: #0f0f1a;
-      border: 1px solid #2d2d5e;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 1rem;
-      outline: none;
-    }
-    input:focus, select:focus { border-color: #60a5fa; }
-    select option { background: #1a1a2e; }
-    button {
-      margin-top: 24px;
-      width: 100%;
-      padding: 14px;
-      background: #3b82f6;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    button:hover { background: #2563eb; }
-    .result {
-      background: #1a1a2e;
-      border: 1px solid #2d2d5e;
-      border-radius: 16px;
-      padding: 32px;
-      white-space: pre-wrap;
-      line-height: 1.8;
-      color: #e5e7eb;
-    }
-    .result-title {
-      color: #60a5fa;
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-    .loading { text-align: center; color: #6b7280; }
-  </style>
+    <meta charset="UTF-8">
+    <title>Travel Itinerary Planner</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0d1117;
+            color: #e6edf3;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #58a6ff;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #8b949e;
+            margin-bottom: 40px;
+        }
+        .form-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #58a6ff;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            color: #e6edf3;
+            font-size: 15px;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #58a6ff;
+            color: #0d1117;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover { background: #79c0ff; }
+        .result-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+            white-space: pre-wrap;
+            line-height: 1.8;
+            color: #e6edf3;
+        }
+        .result-title {
+            color: #58a6ff;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
     <h1>✈️ Travel Itinerary Planner</h1>
-    <p class="sub">Deployed on AWS via Jenkins + Terraform + Docker</p>
+    <p class="subtitle">AI-powered travel planning with Groq</p>
 
-    <div class="card">
-      <form method="post" action="/">
-        <label>Destination</label>
-        <input type="text" name="destination" placeholder="e.g. Paris, Tokyo, Bali" required>
-
-        <label>Number of Days</label>
-        <input type="number" name="days" min="1" max="14" placeholder="e.g. 5" required>
-
-        <label>Budget</label>
-        <select name="budget">
-          <option value="Budget (cheap)">Budget (cheap)</option>
-          <option value="Medium">Medium</option>
-          <option value="Luxury">Luxury</option>
-        </select>
-
-        <label>Travel Style</label>
-        <select name="style">
-          <option value="Adventure">Adventure</option>
-          <option value="Relaxed">Relaxed</option>
-          <option value="Cultural">Cultural</option>
-          <option value="Food & Nightlife">Food & Nightlife</option>
-        </select>
-
-        <button type="submit">Generate Itinerary 🗺️</button>
-      </form>
+    <div class="form-card">
+        <form method="POST">
+            <div class="form-group">
+                <label>Destination</label>
+                <input type="text" name="destination" placeholder="e.g. Paris, France" required>
+            </div>
+            <div class="form-group">
+                <label>Number of Days</label>
+                <input type="number" name="days" min="1" max="30" placeholder="e.g. 5" required>
+            </div>
+            <div class="form-group">
+                <label>Budget</label>
+                <select name="budget">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="luxury">Luxury</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Travel Style</label>
+                <select name="style">
+                    <option value="adventure">Adventure</option>
+                    <option value="relaxed">Relaxed</option>
+                    <option value="cultural">Cultural</option>
+                    <option value="food">Food</option>
+                </select>
+            </div>
+            <button type="submit">Generate Itinerary </button>
+        </form>
     </div>
 
     {% if itinerary %}
-    <div class="result">
-      <div class="result-title">📍 Your Itinerary</div>
-      {{ itinerary }}
+    <div class="result-card">
+        <div class="result-title"> Your Itinerary</div>
+        {{ itinerary }}
     </div>
     {% endif %}
-  </div>
 </body>
 </html> 
